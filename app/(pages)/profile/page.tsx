@@ -1,6 +1,10 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { options } from "../api/auth/[...nextauth]/options";
+import { options } from "../../api/auth/[...nextauth]/options";
+import Link from "next/link";
+import prisma from "@/prismaClient";
+
+// Shadecn Components
 import {
   Card,
   CardContent,
@@ -11,8 +15,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-import prisma from "@/prismaClient";
+import SignOut from "../../components/signout";
 
 export default async function ProfilePage() {
   const session = await getServerSession(options);
@@ -35,13 +38,14 @@ export default async function ProfilePage() {
   });
 
   const getInitials = (name: string | null | undefined) => {
-    if (!name) return "U";
     return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
+      ? name
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+          .toUpperCase()
+          .slice(0, 2)
+      : "U";
   };
 
   const formatDate = (date: Date) => {
@@ -58,12 +62,8 @@ export default async function ProfilePage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">Profile</h1>
-          <Link href="/">
-            <Button variant="outline">Back</Button>
-          </Link>
         </div>
 
-        {/* Profile Card */}
         <Card className="shadow-sm">
           <CardHeader>
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
@@ -72,8 +72,8 @@ export default async function ProfilePage() {
                   src={session.user.image || undefined}
                   alt={session.user.name || "User"}
                 />
-                <AvatarFallback className="text-2xl">
-                  {session.user.name}
+                <AvatarFallback className="text-3xl">
+                  {getInitials(session.user.name)}
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 text-center md:text-left">
@@ -84,12 +84,12 @@ export default async function ProfilePage() {
                   {session.user.email}
                 </CardDescription>
               </div>
-              <Link href="/auth/signout">
-                <Button variant="destructive">Sign Out</Button>
-              </Link>
+              <SignOut />
             </div>
           </CardHeader>
+
           <Separator />
+
           <CardContent className="pt-6">
             <div className="grid gap-6 md:grid-cols-2">
               {/* Account Information */}

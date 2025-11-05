@@ -124,7 +124,7 @@ export default async function ProfilePage() {
                 <h3 className="text-lg font-semibold">Connected Accounts</h3>
                 {user?.accounts && user.accounts.length > 0 ? (
                   <div className="space-y-2">
-                    {user.accounts.map((account, index) => (
+                    {user.accounts.map((account: any, index: number) => (
                       <div
                         key={index}
                         className="flex items-center gap-3 p-3 rounded-lg bg-slate-50">

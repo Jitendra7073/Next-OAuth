@@ -4,6 +4,12 @@ import { Menu, X } from "lucide-react";
 import UserAuthButtons from "./userAuthButtons";
 
 const Header = () => {
+  const NavLinks = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+    { label: "Products", href: "/products" },
+  ];
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
@@ -16,21 +22,16 @@ const Header = () => {
         </div>
 
         <nav className="hidden md:flex gap-4">
-          <Link
-            href="/"
-            className="px-4 py-2 rounded hover:bg-gray-100 transition">
-            Home
-          </Link>
-          <Link
-            href="/about"
-            className="px-4 py-2 rounded hover:bg-gray-100 transition">
-            About
-          </Link>
-          <Link
-            href="/contact"
-            className="px-4 py-2 rounded hover:bg-gray-100 transition">
-            Contact
-          </Link>
+          {NavLinks.map((link, index) => {
+            return (
+              <Link
+                key={index}
+                href={link.href}
+                className="px-4 py-2 rounded hover:bg-gray-100 transition">
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden md:flex">

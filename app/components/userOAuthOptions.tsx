@@ -11,9 +11,9 @@ import { useState } from "react";
 export default function oauthOptions() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleOAuthSignIn = async (provider: "github" | "google") => {
+  const handleOAuthSignIn = async (provider: any) => {
     setIsLoading(true);
-    await signIn(provider, { callbackUrl: "/" });
+    await signIn(provider);
   };
 
   return (

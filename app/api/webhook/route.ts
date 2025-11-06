@@ -43,8 +43,8 @@ export async function POST(req: NextRequest) {
         },
       ],
       success_url:
-        "http://localhost:3000/v1/payment/success?customer_id=" + customer.id,
-      cancel_url: "http://localhost:3000/v1/products/" + data.product.id,
+        "https://next-practice-project-alpha.vercel.app/v1/payment/success?customer_id=" + customer.id,
+      cancel_url: "https://next-practice-project-alpha.vercel.app/v1/products/" + data.product.id,
     });
 
     return NextResponse.json({

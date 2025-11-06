@@ -27,7 +27,7 @@ export default async function UserAuthButtons() {
   return (
     <div className="max-w-4xl mx-auto">
       {session ? (
-        <Link href="/profile" className="cursor-pointer">
+        <Link href="/v1/profile" className="cursor-pointer">
           <Tooltip>
             <TooltipTrigger asChild>
               <Avatar className="h-12 w-12">

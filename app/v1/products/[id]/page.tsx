@@ -1,29 +1,41 @@
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import ShopButton from "@/app/components/shopButton";
+import ProductList from "@/services/productList";
+import { getServerSession } from "next-auth";
+
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
+
 const ProductbyId = async ({ params }: { params: { id: string } }) => {
-  const ProductList = await fetch("https://fakestoreapi.com/products", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const Data = await ProductList.json();
-
+  const session = await getServerSession(options);
   const { id } = await params;
-
-  const product = Data.find((p: any) => p.id === Number(id));
-  console.log("product:", product);
-
+  const Data = await ProductList();
+  const product = Data.find((item: Product) => item.id === Number(id));
   if (!product) {
-    return <div>Product not found</div>;
+    return (
+      <div>
+        <h1>Product not found</h1>
+      </div>
+    );
   }
-
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container py-15 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap p-5">
-          <div className="flex justify-center">
+          <div className="flex justify-center ">
             <img
               alt="ecommerce"
-              className="object-cover object-center rounded"
+              className=" h-100 w-auto object-cover object-center"
               src={product.image}
             />
           </div>
@@ -68,18 +80,9 @@ const ProductbyId = async ({ params }: { params: { id: string } }) => {
 
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">
-                ${product.price}
+                &#8377; {product.price}
               </span>
-              <button className="flex items-center ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                Buy Now
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  className="w-4 h-4 ml-2"
-                  viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </button>
+              <ShopButton product={product} user={session || null} />
             </div>
           </div>
         </div>

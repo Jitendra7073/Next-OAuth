@@ -6,9 +6,9 @@ import UserAuthButtons from "./userAuthButtons";
 const Header = () => {
   const NavLinks = [
     { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-    { label: "Products", href: "/products" },
+    { label: "About", href: "/v1/about" },
+    { label: "Contact", href: "/v1/contact" },
+    { label: "Products", href: "/v1/products" },
   ];
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">

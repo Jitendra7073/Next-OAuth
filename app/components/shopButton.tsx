@@ -17,7 +17,6 @@ interface Product {
 }
 
 const ShopButton = ({ product, user }: { product: Product; user: any }) => {
-  // const route = useRouter();
   const handleBuyNow = async () => {
     const response = await fetch("/api/webhook", {
       method: "POST",

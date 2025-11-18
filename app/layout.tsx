@@ -1,4 +1,6 @@
 import "./globals.css";
+
+import { ThemeProvider } from "../provider/themeProvider";
 import Header from "./components/header";
 import Footer from "./components/footer";
 
@@ -8,13 +10,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={` flex justify-between flex-col min-h-screen`}>
-        <Header />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
+          <Header />
 
-        {children}
+          {children}
 
-        <Footer />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -16,9 +16,13 @@ model User {
   password      String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  isOnline      Boolean   @default(false)
+  lastSeen      DateTime  @default(now())
 
   accounts      Account[]
   sessions      Session[]
+  sentMessages     ChatMessage[] @relation("SentMessages")
+  receivedMessages ChatMessage[] @relation("ReceivedMessages")
 }
 
 model Account {
@@ -57,4 +61,20 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model ChatMessage {
+  id         String   @id @default(cuid())
+  message    String   @db.Text
+  senderId   String
+  receiverId String
+  isRead     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([createdAt])
+}
 

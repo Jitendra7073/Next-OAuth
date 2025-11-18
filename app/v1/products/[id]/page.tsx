@@ -29,7 +29,7 @@ const ProductbyId = async ({ params }: { params: { id: string } }) => {
     );
   }
   return (
-    <section className="text-gray-600 body-font overflow-hidden">
+    <section className="text-gray-600 dark:text-gray-300 body-font overflow-hidden">
       <div className="container py-15 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap p-5">
           <div className="flex justify-center ">
@@ -40,10 +40,10 @@ const ProductbyId = async ({ params }: { params: { id: string } }) => {
             />
           </div>
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-            <h2 className="text-sm title-font text-gray-500 tracking-widest">
+            <h2 className="text-sm title-font text-gray-500 dark:text-gray-400 tracking-widest">
               CATEGORY
             </h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+            <h1 className="text-gray-900 dark:text-gray-300 text-3xl title-font font-medium mb-1">
               {product.category}
             </h1>
             <div className="flex mb-4">
@@ -71,7 +71,7 @@ const ProductbyId = async ({ params }: { params: { id: string } }) => {
                     </svg>
                   )
                 )}
-                <span className="text-gray-600 ml-3">
+                <span className="text-gray-600 dark:text-gray-400 ml-3">
                   {product.rating.count} Reviews
                 </span>
               </span>
@@ -79,7 +79,7 @@ const ProductbyId = async ({ params }: { params: { id: string } }) => {
             <p className="leading-relaxed my-10">{product.description}</p>
 
             <div className="flex">
-              <span className="title-font font-medium text-2xl text-gray-900">
+              <span className="title-font font-medium text-2xl text-gray-900 dark:text-gray-300">
                 &#8377; {product.price}
               </span>
               <ShopButton product={product} user={session || null} />

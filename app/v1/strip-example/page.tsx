@@ -4,7 +4,7 @@ import Link from "next/link";
 const ProductCard = ({ product }: { product: any }) => {
   return (
     <Link
-      href={`/v1/products/${product.id}`}
+      href={`/v1/strip-example/${product.id}`}
       className="hover:bg-gray-100 dark:hover:bg-gray-900/30 rounded min-h-full p-5 transition">
       <div>
         <div className="flex justify-center rounded-lg h-64 overflow-hidden mb-5">

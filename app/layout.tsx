@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "../provider/themeProvider";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import TanStackProvider from "@/provider/tanstackProvider";
 
 export default function RootLayout({
   children,
@@ -12,17 +13,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={` flex justify-between flex-col min-h-screen`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange>
-          <Header />
-
-          {children}
-
-          <Footer />
-        </ThemeProvider>
+        <TanStackProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange>
+            <Header />
+            {children}
+            <Footer />
+          </ThemeProvider>
+        </TanStackProvider>
       </body>
     </html>
   );

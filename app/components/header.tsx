@@ -6,13 +6,16 @@ import ModeToggle from "./themeToggle";
 
 const Header = () => {
   const NavLinks = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/v1/about" },
-    { label: "Products", href: "/v1/products" },
+    { label: "TanStack Example", href: "/v1/tenstack-example" },
+    { label: "Strip Example", href: "/v1/strip-example" },
+    {
+      label: "WebSocket Example",
+      href: "https://chat-app-delta-three-25.vercel.app/",
+    },
   ];
 
   return (
-    <header className="sticky top-0 z-50  shadow-sm">
+    <header className="sticky top-0 z-50  shadow-sm bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
